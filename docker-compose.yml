@@ -1,0 +1,5 @@
+services:
+  evil-plant:
+    image: anssi/fcsc2023-misc-evil-plant:latest
+    ports:
+      - ${PORT_OPC_UA}:4841
