@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="fr">
+    <meta charset="UTF-8">
+    <!--Page Title-->
+    <title>Hack-Oeil - Les CTFs de Cyrhades</title>
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" title="Favicon" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./assets/css/github.min.css">
+    <script src="./assets/js/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Vérifie si la fenêtre est dans une iframe
+            if (window.self !== window.top) {
+                document.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', (event) => {
+                        const a = event.target.closest('a[href^="http"]');
+                        if (a) {
+                            event.preventDefault();
+                            window.parent.postMessage({
+                                type: "open-external",
+                                url: a.href
+                            }, "*");
+                        }
+                    });
+                });
+            }
+            // Active la coloration syntaxique :
+            if (window.hljs) {
+                hljs.highlightAll();
+            } else {
+                console.error("Highlight.js non chargé !");
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!--Main Content Area-->
+        <main id="content">
+            <!--Ctf-->
+            <section class="ctf scrollto">
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Challenge #341</h3>
+                            <h2 class="section-title">Evil Plant</h2>
+                            <p>Bonjour,
+                                <br /><br />
+                                D'après nos analyses couplées à nos relevés satellites, nous avons confirmation que la
+                                cible,
+                                sous couverture d'être une usine de production de vaccins, est en réalité une usine de
+                                production
+                                de liquide toxique utilisée à des fins militaires.
+                                <br /><br />
+                                Les reconnaissances du réseau effectuées nous indiquent que la cible est contrôlée par
+                                un automate
+                                programmable industriel, lui-même communiquant via une interface SCADA par le protocole
+                                OPC-UA en
+                                mode binaire. Nous avons exposé la cible sur internet via un implant UMTS, celle-ci est
+                                désormais
+                                accessible sur le réseau :
+                                <br /><br />
+                                <code>localhost:4841</code>
+                                <br /><br />
+                                Un <i>screenshot</i> de l'interface SCADA à un temps indéterminé a également pu être
+                                récupéré :
+                                <br /><br />
+                                <img src="assets/images/evil-plant.png">
+                                <br /><br />
+
+                                L'analyse des documents d'ingénierie récupérés a montré que la formule du liquide
+                                toxique est composée de 16 éléments.
+                                Nous ignorons les taux utilisés dans la formule ainsi que l'ordonnancement des
+                                différents éléments :
+                                nous faisons appel à vous pour les récupérer.
+                                <br /><br />
+                                Il semblerait que les éléments soient ajoutés dans la cuve <code>MIX</code> (en bas du
+                                screenshot) deux par deux,
+                                mais pour pouvoir créer un remède efficace, nous avons besoin de savoir exactement dans
+                                quel ordre et avec
+                                quels taux les couples d'éléments sont mélangés.
+                                <br /><br />
+                                Faites vite, le temps presse…
+                                <br /><br />
+                                <strong>Note :</strong> Le numéro des éléments dans un couple d'éléments est à indiquer
+                                dans l'ordre
+                                croissant
+                                (<code>030c</code> et pas <code>0c03</code> dans l'étape 2 de l'exemple ci-dessous), et
+                                les taux
+                                correspondants dans le même ordre.
+                                <br /><br />
+                                <strong>Exemple :</strong> On donne un exemple du format du flag à soumettre. Supposons
+                                que le
+                                processus de fabrication comporte les trois étapes suivantes :
+                                <br />
+                                - <strong>Étape 1 :</strong> ajout de 27 unités (<code>0x1b</code>) de l'élément 1
+                                (<code>0x01</code>) et de 47
+                                unités (<code>0x2f</code>) de l'élément 8 (<code>0x08</code>) dans la cuve
+                                <code>MIX</code>.
+                                <br />
+                                - <strong>Étape 2 :</strong> ajout de 95 unités (<code>0x5f</code>) de l'élément 12
+                                (<code>0x0c</code>) et de 141
+                                unités (<code>0x8d</code>) de l'élément 3 (<code>0x03</code>) dans la cuve
+                                <code>MIX</code>.
+                                <br />
+                                - <strong>Étape 3 :</strong> ajout de 230 unités (<code>0xe6</code>) de l'élément 5
+                                (<code>0x05</code>) et de 177
+                                unités (<code>0xb1</code>) de l'élément 16 (<code>0x10</code>) dans la cuve
+                                <code>MIX</code>.
+                                <br /><br />
+                                Le flag à soumettre serait <code>FCSC{01081b2f030c8d5f0510e6b1}</code>, où toutes les
+                                valeurs
+                                sont exprimées en notation hexadécimale.
+                            </p>
+                            <h4>Fichier à étudier</h4>
+                            <p>
+                                - evil-plant.png
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>FCSC 2023</h3>
+                            <h2 class="section-title">Hackropole</h2>
+                            <p class="section-subtitle">
+                                Lien officiel :
+                                <a target="_blank"
+                                    href="https://hackropole.fr/fr/challenges/misc/fcsc2023-misc-evil-plant/">FCSC
+                                    2023 -
+                                    Evil Plant
+                                </a>
+                                <br />
+                                Auteur: Ludo
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Apprentissage</h3>
+                            <h2 class="section-title">Documentations et Vidéos</h2>
+                            <p class="section-subtitle">
+                                Aucune documentation pour le moment
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="row clearfix">
+                    <div class="col-1">
+                        <div class="section-heading">
+                            <h3>Aide</h3>
+                            <h2 class="section-title">Conseils et indices</h2>
+                            <p class="section-subtitle">
+                                <a target="_blank"
+                                    href="https://discord.com/channels/1175764392307077120/1175764601716092948">Fil sur
+                                    le Discord</a>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <!--End of Ctf-->
+        </main>
+        <!--End Main Content Area-->
+
+        <a id="scrollUp" href="#wrapper" style="position: fixed; z-index: 1000;"
+            aria-label="Remonter en haut de la page" title="Remonter en tête de site"></a>
+    </div>
+</body>
+
+</html>
